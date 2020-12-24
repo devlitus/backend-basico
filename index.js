@@ -22,6 +22,8 @@ app.use(express.static(publicPath));
 
 // Rutas
 app.use('/api/login', require('./routes/auth'));
+app.use('/api/users', require('./routes/user'));
+app.use('/api/message', require('./routes/message'));
 
 // Activar el servidor
 server.listen(process.env.PORT, (err) => {

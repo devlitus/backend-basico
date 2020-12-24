@@ -49,15 +49,17 @@ const login = async (req, res = response) => {
         msg: 'Email no encontrado',
       })
     }
+
     const validPassword = bycript.compareSync(password, userDB.password);
     if (!validPassword) {
+
       return res.status(400).json({
         ok: false,
         msg: 'Contraseña no es valida',
       })
     }
 
-    const token = await generateJWT(userDB.id)
+    const token = await generateJWT(userDB.id);
     res.json({
       ok: true,
       user: userDB,
