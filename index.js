@@ -1,32 +1,32 @@
-const express = require('express');
-const path = require('path');
-require('dotenv').config();
+const express = require('express')
+const path = require('path')
+require('dotenv').config()
 
 // DB Config
-require('./database/consfig').dbConnection();
+require('./database/consfig').dbConnection()
 
 // App express
-const app = express();
+const app = express()
 
 // Lectura y parseo del Body
-app.use(express.json());
+app.use(express.json())
 
 // Node Server
-const server = require('http').createServer(app);
-module.exports.io = require('socket.io')(server);
-require('./sockets/socket');
+const server = require('http').createServer(app)
+module.exports.io = require('socket.io')(server)
+require('./sockets/socket')
 
 // Path Public
-const publicPath = path.resolve(__dirname, 'public');
-app.use(express.static(publicPath));
+const publicPath = path.resolve(__dirname, 'public')
+app.use(express.static(publicPath))
 
 // Rutas
-app.use('/api/login', require('./routes/auth'));
-app.use('/api/users', require('./routes/user'));
-app.use('/api/message', require('./routes/message'));
+app.use('/api/login', require('./routes/auth'))
+app.use('/api/users', require('./routes/user'))
+app.use('/api/message', require('./routes/message'))
 
 // Activar el servidor
 server.listen(process.env.PORT, (err) => {
-  if (err) throw new Error(err);
-  console.log(`Servidor corriendo en puerto ${process.env.PORT}`);
+  if (err) throw new Error(err)
+  console.log(`Servidor corriendo en puerto ${process.env.PORT}`)
 })
